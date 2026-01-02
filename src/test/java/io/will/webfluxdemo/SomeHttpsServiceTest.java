@@ -1,7 +1,7 @@
 package io.will.webfluxdemo;
 
+import io.will.webfluxdemo.client.SomeHttpsServiceClient;
 import io.will.webfluxdemo.controller.SomeHttpsServiceController;
-import io.will.webfluxdemo.service.SomeHttpsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
@@ -18,12 +18,12 @@ public class SomeHttpsServiceTest {
     private WebTestClient webTestClient;
 
     @MockBean
-    private SomeHttpsService someHttpsService;
+    private SomeHttpsServiceClient someHttpsServiceClient;
 
     @Test
     void testPing() {
         // Mock the service to return a friendly non-empty string
-        when(someHttpsService.ping()).thenReturn(Mono.just("pong"));
+        when(someHttpsServiceClient.ping()).thenReturn(Mono.just("pong"));
 
         // Test the endpoint
         webTestClient.get()
